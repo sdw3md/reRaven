@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include_once 'db.php';
+include_once '../config/db.php';
 
 if(isset($_SESSION['username'])){
 	header("Location: /reRaven/index.php");

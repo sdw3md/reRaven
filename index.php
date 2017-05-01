@@ -18,6 +18,14 @@
 			div {
 				margin: 20px;
 			}
+			
+			span:first-child {
+				text-transform: capitalize;
+			}
+
+			#firstWord {
+				text-transform: uppercase;
+			}
 		</style>
 	</head>
 	<body>

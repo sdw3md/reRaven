@@ -36,6 +36,7 @@
 		This is where the body will go
 		<div>
 		<button type="button" id="scrambleButton"> scramble</button>
+		<!--<button type="button" id="scanButton">scan</button>-->
 		<?php
 		//$poem = file_get_contents("bodytest.html");
 		
@@ -51,7 +52,8 @@
 				$(".word").each(function(){
 					var word = $(this).text();
 				//	console.log('current this is: ' + this);
-					$(this).text(getWord(word));
+					//$(this).text(getWord(word));
+					getWordForObject($(this));
 					//$(this).text("word");
 
 				});
@@ -60,11 +62,61 @@
 			$(".word").click(function(){
 				$(this).text("click");
 			});
+			
+			$("#scanButton").click(function(){
+				$(".word").each(function(){
+					var word = $(this).text();
+					addWord(word);
+				});
+			});
 		});
 
-		function getWord(word){
-			return "word";
+		function getWordForObject(wordObject){
+			var newWord;
+			var oldWord = wordObject.text();
+			newWord = "word";
+			
+			$.ajax({
+				type: "POST",
+				url: "word_management/getWord.php",
+				data: "getWord=" + oldWord,
+				success: function(result){
+					console.log(result);
+					//newWord = result;
+					wordObject.text(result);
+				}
+			});
+			//return newWord;
 		}
+		function getWord(word){
+			var newWord;
+			newWord = "word";
+			
+			$.ajax({
+				type: "POST",
+				url: "word_management/getWord.php",
+				data: "getWord=" + word,
+				success: function(result){
+					console.log(result);
+					newWord = result;
+				}
+			});
+			return newWord;
+		}
+
+		function addWord(word){
+			$.ajax({
+				type: "POST",
+				url: "word_management/addWord.php",
+				data: "word=" + word,
+				success: function(result){
+					console.log(result);
+				}
+			});
+		}
+
+
+		
 		</script>
 	</body>
 </html>

@@ -5,5 +5,5 @@ if(isset($_SESSION['username'])){
 	session_destroy();
 	unset($_SESSION['username']);
 }
-header("Location: /reRaven/index.php");
+header("Location: login.php");
 ?>

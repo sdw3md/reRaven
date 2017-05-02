@@ -3,7 +3,16 @@ session_start();
 
 include_once '../config/db.php';
 
+if(!isset($_POST['username'])){
+	
+	header("Location: ../user_management/login.php");
+}
+
+$username = $_POST['username'];
+
 $connection = connect();
+
+
 
 if(isset($_POST['word'])){
 	$word = $_POST['word'];
@@ -33,7 +42,7 @@ if(isset($_POST['word'])){
 	//echo $newId;
 	//$result = $connection->query($qry);
 	//$newId = 0;
-	$qry = "INSERT INTO synonym(Word, WordGroup) VALUES (\"" . $word . "\", '" . $newId . "')";
+	$qry = "INSERT INTO synonym(Word, WordGroup, UserName) VALUES (\"" . $word . "\", '" . $newId . "', '" . $username . "')";
 	//$qry = "INSERT INTO synonym(Word) VALUES ('" . $word . "')";
 	
 	//echo $qry;

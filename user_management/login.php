@@ -2,13 +2,13 @@
 session_start();
 
 
+if(isset($_SESSION['username'])){
+	header("Location: /reRaven/index.php");
+}
 include_once '../config/db.php';
 
 $connection = connect();
 
-if(isset($_SESSION['username'])){
-	header("Location: /reRaven/index.php");
-}
 
 if(isset($_POST['login'])){
 	$rawUsername = $_POST['username'];

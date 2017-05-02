@@ -1,7 +1,10 @@
 <?php
 session_start();
 
+
 include_once '../config/db.php';
+
+$connection = connect();
 
 if(isset($_SESSION['username'])){
 	header("Location: /reRaven/index.php");
@@ -58,6 +61,8 @@ if(isset($_POST['login'])){
 		echo "ur dum";
 	}
 }
+
+mysqli_close($connection);
 
 ?>
 

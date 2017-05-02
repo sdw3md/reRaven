@@ -36,7 +36,8 @@
 		This is where the body will go
 		<div>
 		<button type="button" id="scrambleButton"> scramble</button>
-		<!--<button type="button" id="scanButton">scan</button>-->
+		<button type="button" id="getThesButton"> getThes </button>
+		<button type="button" id="scanButton">scan</button>
 		<?php
 		//$poem = file_get_contents("bodytest.html");
 		
@@ -47,30 +48,65 @@
 		</div>
 		<script>
 
+		var thesaurus;
+
 		$(document).ready(function(){
+			getThes();	
+			$("#getThesButton").click(function(){
+				console.log("clicking getThesButton");
+				getThes();
+			});
 			$("#scrambleButton").click(function(){
 				$(".word").each(function(){
-					var word = $(this).text();
+					var word = $(this).text().toLowerCase();
 				//	console.log('current this is: ' + this);
 					//$(this).text(getWord(word));
-					getWordForObject($(this));
-					//$(this).text("word");
+					//getWordForObject($(this));
+					var newWord = getWord(word);
+					$(this).text(newWord);
 
 				});
 			});
 
 			$(".word").click(function(){
-				$(this).text("click");
+				var word = $(this).text().toLowerCase();
+				var newWord = getWord(word);
+				$(this).text(newWord);
 			});
 			
 			$("#scanButton").click(function(){
 				$(".word").each(function(){
-					var word = $(this).text();
+					var word = $(this).text().toLowerCase();
 					addWord(word);
 				});
 			});
 		});
 
+		function getThes(){
+			console.log("calling getThes()");
+			$.ajax({
+				type: "POST",
+				url: "word_management/getThesaurus.php",
+				data: "",
+				success: function(result){
+					//console.log(result);
+					//var parsed = JSON.parse(result);
+					//console.log(parsed);
+					setThes(JSON.parse(result));
+					//setThes(result);
+					printThes();
+				}
+			});
+		}
+
+		function setThes(thes){
+			thesaurus = thes;
+		}
+		
+		function printThes(){
+			console.log(thesaurus);
+		}
+/*
 		function getWordForObject(wordObject){
 			var newWord;
 			var oldWord = wordObject.text();
@@ -88,20 +124,40 @@
 			});
 			//return newWord;
 		}
+*/
 		function getWord(word){
-			var newWord;
-			newWord = "word";
+			var newWord = "word";
+		
+			var wordGroup = getWordGroup(word);	
 			
-			$.ajax({
-				type: "POST",
-				url: "word_management/getWord.php",
-				data: "getWord=" + word,
-				success: function(result){
-					console.log(result);
-					newWord = result;
-				}
+			var optionList = thesaurus.filter(function(obj){
+				return obj["WordGroup"] == wordGroup;
 			});
-			return newWord;
+
+
+			newWord = optionList[Math.floor(Math.random() * optionList.length)]["Word"];
+
+			if(wordGroup){
+				return newWord;
+			} else {
+				return word;
+			}
+		}
+
+		function getWordGroup(word){
+			var wordEntries = thesaurus.filter(function(obj){
+				return obj["Word"].localeCompare(word) == 0;
+			});
+			var wordEntry = wordEntries[0];
+			var wordGroup;
+			if(wordEntry){
+				wordGroup = wordEntry["WordGroup"];
+			} else {
+				wordGroup = 0;
+				console.log("wordEntries: " + wordEntries + ", word: " + word);
+			}
+			//console.log("word group: " + wordGroup);
+			return wordGroup;
 		}
 
 		function addWord(word){

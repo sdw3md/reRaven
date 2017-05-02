@@ -3,6 +3,8 @@ session_start();
 
 include_once '../config/db.php';
 
+$connection = connect();
+
 if(isset($_POST['word'])){
 	$word = $_POST['word'];
 	//$global = $_POST['global'];
@@ -30,7 +32,7 @@ if(isset($_POST['word'])){
 	//echo $newId;
 	//$result = $connection->query($qry);
 	//$newId = 0;
-	$qry = "INSERT INTO synonym(Word, WordGroup) VALUES ('" . $word . "', '" . $newId . "')";
+	$qry = "INSERT INTO synonym(Word, WordGroup) VALUES (\"" . $word . "\", '" . $newId . "')";
 	//$qry = "INSERT INTO synonym(Word) VALUES ('" . $word . "')";
 	
 	//echo $qry;

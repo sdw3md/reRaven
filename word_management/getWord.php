@@ -3,6 +3,8 @@ session_start();
 
 include_once '../config/db.php';
 
+$connection = connect();
+
 if(isset($_POST['getWord'])){
 	//get the wordGroup posted by ajax
 	$word = $_POST['getWord'];

@@ -49,38 +49,63 @@
 		<script>
 
 		var thesaurus;
+		var wordObjects = [];
 
 		$(document).ready(function(){
 			getThes();	
+			initWordObjects();	
 			$("#getThesButton").click(function(){
 				console.log("clicking getThesButton");
 				getThes();
 			});
 			$("#scrambleButton").click(function(){
-				$(".word").each(function(){
+				/*$(".word").each(function(){
 					var word = $(this).text().toLowerCase();
-				//	console.log('current this is: ' + this);
+					console.log('current this is: ' + this);
+					//$(this).text(getWord(word));
+					//getWordForObject($(this));
+					var newWord = getWord(word);
+					$(this).text(newWord);
+
+				});*/
+				wordObjects.forEach(function(){
+					var word = $(this).text().toLowerCase();
+					console.log('current this is: ' + this);
 					//$(this).text(getWord(word));
 					//getWordForObject($(this));
 					var newWord = getWord(word);
 					$(this).text(newWord);
 
 				});
+				console.log("scramble complete");
 			});
 
 			$(".word").click(function(){
 				var word = $(this).text().toLowerCase();
-				var newWord = getWord(word);
+				//var newWord = getWord(word);
+				var newWord = "clicked";
 				$(this).text(newWord);
 			});
 			
 			$("#scanButton").click(function(){
+				var wordList = [];
 				$(".word").each(function(){
 					var word = $(this).text().toLowerCase();
-					addWord(word);
+					if($.inArray(word, wordList) == -1){
+					//addWord(word);
+						addWord($(this));
+						wordList.push(word);
+					}
 				});
+				console.log("finished scan");
 			});
 		});
+
+		function initWordObjects(){
+			$(".word").each(function(){
+				wordObjects.push($(this));
+			});
+		}
 
 		function getThes(){
 			console.log("calling getThes()");
@@ -160,13 +185,17 @@
 			return wordGroup;
 		}
 
-		function addWord(word){
+		function addWord(wordObject){
+			var word = wordObject.text().toLowerCase();
+			
 			$.ajax({
 				type: "POST",
 				url: "word_management/addWord.php",
 				data: "word=" + word,
 				success: function(result){
-					console.log(result);
+					console.log("Word Object: " + wordObject.text() + ", word group: " + result);
+					//wordObject.addClass(result);
+					console.log(wordObject);
 				}
 			});
 		}

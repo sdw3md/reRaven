@@ -29,6 +29,7 @@ if(isset($_POST['word'])){
 	} else {
 		$newId = 0;
 	}
+	//$result->close();
 	//echo $newId;
 	//$result = $connection->query($qry);
 	//$newId = 0;
@@ -38,7 +39,10 @@ if(isset($_POST['word'])){
 	//echo $qry;
  
 	$result = $connection->query($qry);
-	
+
+	//$result->close();
+	//return word group
+	echo $newId;	
 	//echo $qry;
 		
 

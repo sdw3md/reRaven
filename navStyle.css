@@ -1,0 +1,52 @@
+body {
+	margin: 0px;
+}
+
+.ui-dialog-titlebar-close {
+	display: none;
+}
+
+.ui-dialog-titlebar {
+	height: auto:
+}
+
+.myDialog {
+	width: 400px;
+	text-align: center;
+}
+
+.myInputField {
+	width: 90%;
+	margin: auto;
+	text-align: center;
+}
+
+#newSynonym {
+	margin: auto;
+}
+
+.navElement {
+
+	width: 100%;
+	height: auto;
+	margin: 0px;
+	float: left;
+	background-color: blue;
+	position: fixed;
+	left: 0;
+	top: 0;
+}
+
+#poemWrapper {
+	width: 80%;
+	margin: auto;
+	text-align: center;
+	height: auto;
+	/*margin-top: 200px;*/
+	/*overflow: scroll;*/
+}
+
+.ui-dialog {
+	position: fixed;
+	top: 25%;
+}

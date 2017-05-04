@@ -3,19 +3,18 @@ session_start();
 
 include_once '../config/db.php';
 
-if(!isset($_POST['username'])){
+if(!isset($_SESSION['username'])){
 	
 	header("Location: ../user_management/login.php");
 }
 
-$username = $_POST['username'];
 
 $connection = connect();
 
-
+$username = mysqli_real_escape_string($connection, $_POST['username']);
 
 if(isset($_POST['word'])){
-	$word = $_POST['word'];
+	$word = mysqli_real_escape_string($connection, $_POST['word']);
 	//$global = $_POST['global'];
 	
 	$qry = "SELECT MAX(WordGroup) AS max_group FROM synonym";

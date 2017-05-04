@@ -8,11 +8,12 @@
 <html>
 	<head>
 		<title>reRaven</title>
-	<!--	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<link href="jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet">
 		<link href="navStyle.css" rel="stylesheet">
 		<script src="jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
 		<script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+		<script src="words.js"></script>
 		<style>
 			p {
 				padding: 0px;
@@ -42,6 +43,7 @@
 		<button type="button" id="scrambleButton"> scramble</button>
 		<button type="button" id="getThesButton"> getThes </button>
 		<button type="button" id="scanButton">scan</button>
+		<input type="checkbox" id="cycleBox" value="cycle">cycle<br>
 		</div>
 		<div id="synonymDialog" class="myDialog" title="Enter a synonym">
 			<input id="newSynonym" class="myInputField" type="text">
@@ -56,6 +58,5 @@
 		include "the_raven.html";
 		?>
 		</div>
-		<script src="words.js"></script>
 	</body>
 </html>

@@ -42,8 +42,12 @@ body {
 }
 
 .myInputField {
-	width: 90%;
-	margin: auto;
+	/*width: 90%;*/
+	flex-grow: 1;
+	background-color: darkslategray;
+	border: none;
+	border-radius: 5px;
+	margin: 5px;
 	text-align: center;
 }
 
@@ -52,7 +56,7 @@ body {
 }
 
 #navBar {
-	height: 10%;
+	height: 15%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -82,6 +86,20 @@ body {
 	top: 0;
 }
 
+.hbox {
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+	justify-content: space-between;
+}
+
+.vbox {
+	display: flex;
+	flex-direction: column;
+	flex: initial;
+	justify-content: space-between;
+}
+
 #mainWrapper {
 	width: 80%;
 	margin: auto;
@@ -104,9 +122,10 @@ body {
 
 
 .navLink {
-	width: 30%;
+	flex-grow: 1;
+	flex-basis: 33%;
 	text-align: center;
-	margin: auto;
+	margin: 0px 5%;
 }
 
 #titleWrapper {
@@ -117,4 +136,8 @@ body {
 .ui-dialog {
 	position: fixed;
 	top: 25%;
+}
+
+#username, #password {
+	text-align: left;
 }

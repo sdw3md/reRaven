@@ -47,6 +47,10 @@ $(document).ready(function(){
 		]
 	 });
 
+	$(".ui-dialog-buttonpane").addClass("hbox");
+	$(".ui-widget-header").addClass("hbox");
+	$(".ui-dialog-content").addClass("hbox");
+
 	$("#synonymDialog").resize( function(){
 		console.log($(this).width());
 		$("#newSynonym").css("width", $("#synonymDialog").width());

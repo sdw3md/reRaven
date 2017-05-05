@@ -1,8 +1,10 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['username'])){
+	$_SESSION['location'] = "index.php";
+/*	if(!isset($_SESSION['username'])){
 		header('Location: user_management/login.php');
-}
+}*/
+	//include "user_management/login.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,20 +42,9 @@
 	</head>
 	<body>
 		<?php include 'nav.php' ?> 
-		<div id="buttonWrapper" class="navElement">
-		<button type="button" id="scrambleButton"> scramble</button>
-		<button type="button" id="getThesButton"> getThes </button>
-		<button type="button" id="scanButton">scan</button>
-		<input type="checkbox" id="cycleBox" value="cycle">cycle<br>
-		</div>
-		<div id="synonymDialog" class="myDialog" title="Enter a synonym">
-			<input id="newSynonym" class="myInputField" type="text">
-		<!--	<button id="submitSynonym" class="button">Submit</button>
-			<button id="cancelSynonym" class="button">Cancel</button>
-		-->	<script>
-				$(".button").button();
-			</script>
-		</div>
+		<?php if(isset($_SESSION['username'])){ 
+			include 'userTools.php'; 
+		} ?>
 		<div id="mainWrapper">
 		<?php
 		include "the_raven.html";

@@ -1,16 +1,16 @@
 <?php
 session_start();
 
-
+/*
 if(isset($_SESSION['username'])){
 	header("Location: /reRaven/index.php");
-}
+}*/
 include_once '../config/db.php';
 
-$connection = connect();
 
 
 if(isset($_POST['login'])){
+	$connection = connect();
 	$rawUsername = $_POST['username'];
 	$rawPassword = $_POST['password'];
 	$username = mysqli_real_escape_string($connection, $rawUsername);
@@ -41,7 +41,7 @@ if(isset($_POST['login'])){
 			$row = $result->fetch_assoc();
 			if(password_verify($password, $row['PasswordHash'])){
 				$_SESSION['username'] = $username;
-				header("Location: /reRaven/index.php");	
+				header("Location: /reRaven/" . $_SESSION['location']);	
 			}
 		}/*
 		while($row = $result->fetch_assoc()){
@@ -53,19 +53,20 @@ if(isset($_POST['login'])){
 		//echo $qry;
 		if(mysqli_query($connection, $qry)){
 			echo "u win";
-			header("Location: /reRaven/index.php");	
+			header("Location: /reRaven/" . $_SESSION['location']);	
+		//	header("Location: /reRaven/index.php");	
 		} else {
 			echo "u fail. ur db fails.";
 		} 
 	} else {
 		echo "ur dum";
 	}
+mysqli_close($connection);
 }
 
-mysqli_close($connection);
 
 ?>
-
+<!--
 <!DOCTYPE html>
 <html>
 	<head>
@@ -73,7 +74,7 @@ mysqli_close($connection);
 	</head>
 	<body>
 		<div>
-			<form action="login.php" method="post" role="form">
+			<form action="index.php" method="post" role="form">
 				<label for="username">username</label>
 				<input id="username" type="text" name="username">
 				<label for="password">password</label>
@@ -82,4 +83,4 @@ mysqli_close($connection);
 			</form>
 		</div>
 	</body>
-</html>
+</html>-->

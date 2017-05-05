@@ -1,3 +1,8 @@
+<?php
+	session_start();
+	$_SESSION['location'] = "about.php";
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

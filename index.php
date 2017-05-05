@@ -15,7 +15,7 @@
 		<script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 		<script src="words.js"></script>
 		<style>
-			p {
+		/*	p {
 				padding: 0px;
 				margin: 0px;
 			}
@@ -35,6 +35,7 @@
 			#synonymDialog {
 				display: none;
 			}
+		*/
 		</style>
 	</head>
 	<body>
@@ -53,7 +54,7 @@
 				$(".button").button();
 			</script>
 		</div>
-		<div id="poemWrapper">
+		<div id="mainWrapper">
 		<?php
 		include "the_raven.html";
 		?>

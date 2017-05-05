@@ -2,6 +2,32 @@ body {
 	margin: 0px;
 }
 
+#videoWrapper {
+	margin: auto;
+	display: flex;
+	justify-content: center;
+}
+
+.aboutHeader {
+/*	float: left;*/
+	display: inline-block;
+}
+
+
+#aboutHeaderWrapper {
+	display: flex;
+	justify-content: center;
+	height: 200px;
+	width: 80%;
+	margin: auto;
+	
+}
+
+.birdPicture {
+	/*width: 200px;*/
+	height: inherit;
+}
+
 .ui-dialog-titlebar-close {
 	display: none;
 }
@@ -25,8 +51,25 @@ body {
 	margin: auto;
 }
 
-.navElement {
+#navBar {
+	height: 10%;
+	display: flex;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
 
+.navWrapper {
+	width: 100%;
+	margin: auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+.navElement {
+	display: inline-block;
+	flex-grow: 1;
 	width: 100%;
 	height: auto;
 	margin: 0px;
@@ -37,13 +80,31 @@ body {
 	top: 0;
 }
 
-#poemWrapper {
+#mainWrapper {
 	width: 80%;
 	margin: auto;
+	padding: 5%;
 	text-align: center;
 	height: auto;
 	/*margin-top: 200px;*/
 	/*overflow: scroll;*/
+}
+
+#loginBlock {
+	text-align: right;
+	display: flex;
+	flex-direction: column;
+}
+
+#aboutBlock {
+	text-align: left;
+}
+
+
+.navLink {
+	width: 30%;
+	text-align: center;
+	margin: auto;
 }
 
 .ui-dialog {

@@ -11,7 +11,11 @@ $(document).ready(function(){
 	initSynonyms();
 */
 	updateMyLibrary();
-
+	
+	if(!$("#cycleBox").length){
+		setCycle(true);
+	}
+	
 	console.log("page showed!");
 	var fixedH = $("#navBar").outerHeight(true);
 	$("#buttonWrapper").css("margin-top", fixedH + "px");
@@ -83,7 +87,10 @@ $(document).ready(function(){
 		}
 	});
 */
-	
+	$("#cycleBox").click(function(){
+		var checked = document.getElementById("cycleBox").checked;
+		setCycle(checked);
+	});
 
 	$(".word").click(function(){
 		var word = $(this).text();
@@ -125,6 +132,16 @@ $(document).ready(function(){
 	//cycle = setInterval(cycleRandom, 100);
 //});
 
+
+
+
+function setCycle(bool){
+	if(bool){
+		cycle = setInterval(cycleRandom, 100);
+	} else {
+		clearInterval(cycle);
+	}
+}
 
 function updateMyLibrary(){
 	getThes();

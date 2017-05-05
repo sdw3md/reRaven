@@ -1,4 +1,5 @@
 <nav id="navBar" class="navElement">
+	<div id="titleWrapper"><h1>reRaven</h1></div>
 	<div class="navWrapper">
 		<div id="aboutBlock" class="navLink" > 
 			<a href="about.php">about</a>

@@ -18,12 +18,16 @@ if(isset($_POST['login'])){
 
 	$valid = true;
 
-	if(strcmp($rawUsername, $username) != 0){
+	if(strcmp($rawUsername, $username) != 0 || strcmp($username, "") == 0) {
 		echo "bad username. try better";
+		$_SESSION['message'] = "bad username! Please try again.";
+		header("Location: /reRaven/badUsername.php");
 		//echo "rawusername: " . $rawUsername . ", clean username: " . $username;
 		$valid = false;
 	}
 	if(strcmp($rawPassword, $password) != 0){
+		$_SESSION['message'] = "bad password! Please try again.";
+		header("Location: /reRaven/badUsername.php");
 		echo "bad password, do a good job!";
 		$valid = false;
 	}
@@ -42,6 +46,9 @@ if(isset($_POST['login'])){
 			if(password_verify($password, $row['PasswordHash'])){
 				$_SESSION['username'] = $username;
 				header("Location: /reRaven/" . $_SESSION['location']);	
+			} else {
+				$_SESSION['message'] = "incorrect password! Please try again.";
+				header("Location: /reRaven/badUsername.php");
 			}
 		}/*
 		while($row = $result->fetch_assoc()){
@@ -52,6 +59,8 @@ if(isset($_POST['login'])){
 		$qry = "INSERT INTO user(UserName, passwordHash) VALUES ('" . $username . "', '" . password_hash($password, PASSWORD_DEFAULT) . "')";
 		//echo $qry;
 		if(mysqli_query($connection, $qry)){
+			$_SESSION['message'] = "New User Created! (good job!)";
+			header("Location: /reRaven/badUsername.php");
 			echo "u win";
 			header("Location: /reRaven/" . $_SESSION['location']);	
 		//	header("Location: /reRaven/index.php");	

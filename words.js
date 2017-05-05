@@ -16,7 +16,7 @@ $(document).ready(function(){
 		setCycle(true);
 	}
 	
-	console.log("page showed!");
+	//console.log("page showed!");
 	var fixedH = $("#navBar").outerHeight(true);
 	$("#buttonWrapper").css("margin-top", fixedH + "px");
 	fixedH += $("buttonWrapper").outerHeight(true);
@@ -34,7 +34,7 @@ $(document).ready(function(){
 			{
 				text: "submit",
 				click: function(){
-					var synonym = $("#newSynonym").val();
+					var synonym = $("#newSynonym").val().toLowerCase();
 					var wordGroup = getWordGroup(selectedWord);	
 					addSynonym(synonym, wordGroup);
 					$(this).dialog("close");
@@ -51,6 +51,16 @@ $(document).ready(function(){
 		]
 	 });
 
+	$("#confirmDialog").dialog({
+		dialogClass: "myDialog",
+		autoOpen: false,
+		resizable: false,
+		draggable: false,
+		height: 100,
+		width: 400,
+		buttons: [{ text: "okay", click: function(){$(this).dialog("close");} }]
+	});
+
 	$(".ui-dialog-buttonpane").addClass("hbox");
 	$(".ui-widget-header").addClass("hbox");
 	$(".ui-dialog-content").addClass("hbox");
@@ -60,6 +70,7 @@ $(document).ready(function(){
 		$("#newSynonym").css("width", $("#synonymDialog").width());
 	});
 	
+
 	$("#getThesButton").click(function(){
 		console.log("clicking getThesButton");
 		getThes();
@@ -79,6 +90,13 @@ $(document).ready(function(){
 		console.log("scramble complete");
 	});
 
+/*
+	$("#loginButton").click(function(){
+		if(("#username").text().localeCompare("") == 0){
+			alert("username cannot be empty!");
+		} 
+	});
+*/
 	//checkbox!
 //	$("#cycleBox").checkboxradio(); 
 /*		refresh: function(){
@@ -93,7 +111,7 @@ $(document).ready(function(){
 	});
 
 	$(".word").click(function(){
-		var word = $(this).text();
+		var word = $(this).text().toLowerCase();
 		selectedWord = word;
 		var sd = $("#synonymDialog");
 		sd.dialog("option", "title", "Enter a synonym for " + word);
@@ -112,6 +130,7 @@ $(document).ready(function(){
 			}
 		});
 		console.log("finished scan");
+		wordList.forEach(addWord);
 	});
 	
 	//adding a new synonym
@@ -174,7 +193,7 @@ function initWordObjects(callBack){
 }
 
 function getThes(){
-	console.log("calling getThes()");
+	//console.log("calling getThes()");
 	$.ajax({
 		type: "POST",
 		url: "word_management/getThesaurus.php",
@@ -248,8 +267,8 @@ function getWordGroup(wordText){
 	if(wordEntry){
 		wordGroup = wordEntry["WordGroup"];
 	} else {
-		wordGroup = 0;
-		console.log("wordEntries: " + wordEntries + ", word: " + wordText);
+		wordGroup = -1;
+		//console.log("wordEntries: " + wordEntries + ", word: " + wordText);
 	}
 	return wordGroup;
 }
@@ -263,22 +282,36 @@ function addWord(wordObject){
 		data: "word=" + word,
 		success: function(result){
 			console.log("Word Object: " + wordObject.text() + ", word group: " + result);
-			console.log(wordObject);
+			//console.log(wordObject);
 		}
 	});
 }
 
 
 function addSynonym(synonym, wordGroup){
-	console.log(wordGroup);
+	//console.log(wordGroup);
 	$.ajax({
 		type: "POST",
 		url:  "word_management/addSynonym.php",
 		data: "WordGroup=" + wordGroup + "&Synonym=" + synonym,
 		success: function(result){
-			console.log(result);
-			console.log("Synonym '" + synonym + "' added for word '" + selectedWord + "'");
+			resultDialog(result);
+		//	console.log(result);
+		//	console.log("Synonym '" + synonym + "' added for word '" + selectedWord + "'");
 		}
 	});
+}
+
+function resultDialog(success){
+	var message;
+	if(success == 1){
+		message = "Synonym successfully added!";
+	} else {
+		message = "Word alread in use, try a new word!";
+	}
+		var cd = $("#confirmDialog");
+		cd.dialog("option", "title", message);
+		cd.dialog("open");
+	//alert(message);	
 }
 });	

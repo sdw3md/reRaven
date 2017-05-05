@@ -1,5 +1,6 @@
 body {
 	margin: 0px;
+	background-color: black;
 }
 
 #videoWrapper {
@@ -47,7 +48,7 @@ body {
 	background-color: darkslategray;
 	border: none;
 	border-radius: 5px;
-	margin: 5px;
+	margin: 2px;
 	text-align: center;
 }
 
@@ -63,6 +64,12 @@ body {
 	position: fixed;
 	top: 0;
 	left: 0;
+
+	background-image: -o-linear-gradient(darkslategray, black);    
+	background-image: -webkit-linear-gradient(darkslategray, black);
+	background-image: -moz-linear-gradient(darkslategray, black);    
+	background-image: -ms-linear-gradient(darkslategray, black);
+	background-image: linear-gradient(darkslategray, black);    
 }
 
 .navWrapper {
@@ -103,9 +110,10 @@ body {
 #mainWrapper {
 	width: 80%;
 	margin: auto;
-	padding: 5%;
+	padding: 10% 5%;
 	text-align: center;
 	height: auto;
+	background-color: lightgray;
 	/*margin-top: 200px;*/
 	/*overflow: scroll;*/
 }
@@ -140,4 +148,41 @@ body {
 
 #username, #password {
 	text-align: left;
+}
+
+label {
+	color: lightgray;
+}
+
+a:link {
+	color: gray;
+}
+
+.cap {
+	text-transform: capitalize;
+}
+
+span:first-child {
+	text-transform: capitalize;
+}
+
+#firstWord {
+	text-transform: uppercase;
+}
+
+
+.block {
+	margin: 50px;
+}
+
+button {
+	border-radius: 5px;
+	background-color: gray;
+	margin: auto 5px;
+	height: 100%;
+}
+
+#buttonWrapper {
+	padding: 10px;
+	background-color: black;
 }

@@ -23,9 +23,11 @@ if(isset($_POST['Synonym']) && isset($_POST['WordGroup'])){
 	$result = $connection->query($qry);
 	
 	if($result){
-		echo "Synonym successfully added";
+//		echo "Synonym successfully added";
+		echo 1; //indicates success
 	} else {
-		echo "failed, word already exists in the table!";
+//		echo "failed, word already exists in the table!";
+		echo 0; //indicates failure
 	}
 } else {
 	echo "post variables not set";

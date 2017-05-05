@@ -11,7 +11,7 @@
 		if(isset($_SESSION['username'])){
 		
 			echo "<div id='loginBlock' class='navLink'>";
-			echo "logged in as " . $_SESSION['username'];
+			echo "<label>logged in as " . $_SESSION['username'] . "</label>";
 			echo "<a href='user_management/logout.php'>log out</a>";
 		} else {
 			include "loginForm.php";

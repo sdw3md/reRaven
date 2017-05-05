@@ -5,6 +5,6 @@
 	</div><div class="hbox">
 		<label for="password">password</label>
 		<input id="password" class="myInputField" type="text" name="password">
-		<input id="loginButton" type="submit" name="login" value="login">
+		<button id="loginButton" type="submit" name="login" value="login">login</button>
 	</div>
 </form>
